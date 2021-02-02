@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="831px" height="833px" viewBox="0 0 831 833" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 61.2 (89653) - https://sketch.com -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="86.5559346%" id="linearGradient-1">
+            <stop stop-color="#3730A3" offset="0%"></stop>
+            <stop stop-color="#5047D9" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-2" x="0" y="0" width="823" height="823" rx="181"></rect>
+        <filter x="-1.1%" y="-0.6%" width="102.2%" height="102.4%" filterUnits="objectBoundingBox" id="filter-3">
+            <feOffset dx="0" dy="6" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-97.000000, -108.000000)">
+            <g id="Group" transform="translate(101.000000, 108.000000)">
+                <g id="Group-Copy">
+                    <g id="Rectangle">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-2"></use>
+                        <use fill="url(#linearGradient-1)" fill-rule="evenodd" xlink:href="#path-2"></use>
+                    </g>
+                    <path d="M293.09292,696 L293.09292,670.038199 L150.23279,670.038199 L150.23279,476 L121,476 L121,696 L293.09292,696 Z M363.603164,696 L410.180526,528.373806 C412.177412,521.270578 414.324064,512.666667 416.620483,502.562074 C417.319393,505.763529 419.615812,514.36744 423.509739,528.373806 L469.787568,696 L497.793892,696 L558,476 L528.795545,476 L494.349264,617.364256 C489.856271,635.372442 486.211954,651.329695 483.416314,665.236016 C479.921764,640.924966 474.230639,614.963165 466.34294,587.350614 L434.891988,476 L399.846642,476 L358.061806,624.567531 C357.063363,628.169168 353.768502,641.72533 348.177221,665.236016 C345.58127,650.329241 342.486097,635.322419 338.891702,620.215553 L305.493787,476 L275.690265,476 L333.94941,696 L363.603164,696 Z" id="LW" fill="#E0E7FF" fill-rule="nonzero"></path>
+                    <polygon id="Path-2" fill="#818CF8" points="121 431.976786 121 113 701 113 701 696 540.92289 696 550.308413 670.42259 676.624657 670.42259 676.624657 137.037231 148.478974 137.037231 148.478974 431.976786"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
