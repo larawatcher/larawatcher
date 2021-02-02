@@ -90,7 +90,7 @@ final class Larawatcher
 
     public function handle(): void
     {
-        if (!$this->enabled) {
+        if (! $this->enabled) {
             return;
         }
 
@@ -118,7 +118,7 @@ final class Larawatcher
     private function setProcessType(): self
     {
         $this->app['events']->listen(RouteMatched::class, function (RouteMatched $event) {
-            if (!is_null($this->type)) {
+            if (! is_null($this->type)) {
                 return;
             }
 
@@ -134,7 +134,7 @@ final class Larawatcher
         });
 
         $this->app['events']->listen(CommandStarting::class, function (CommandStarting $event) {
-            if (!is_null($this->type) || Str::startsWith($event->command, 'queue:')) {
+            if (! is_null($this->type) || Str::startsWith($event->command, 'queue:')) {
                 return;
             }
 
@@ -144,7 +144,7 @@ final class Larawatcher
         });
 
         $this->app['events']->listen(JobProcessing::class, function (JobProcessing $event) {
-            if (!is_null($this->type)) {
+            if (! is_null($this->type)) {
                 return;
             }
 
@@ -183,7 +183,7 @@ final class Larawatcher
     private function listenForExceptions(): self
     {
         $this->app['events']->listen(MessageLogged::class, function ($event) {
-            if (!array_key_exists('exception', $event->context)) {
+            if (! array_key_exists('exception', $event->context)) {
                 return;
             }
 
