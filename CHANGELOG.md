@@ -2,6 +2,10 @@
 
 All notable changes to `larawatcher` will be documented in this file
 
+## 0.1.4 - 2021-02-02
+
+- Change the order of save.
+
 ## 0.1.3 - 2021-02-02
 
 - Fix issue with path replacer.

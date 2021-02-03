@@ -18,11 +18,8 @@ class Save extends BaseAction
             return;
         }
 
-        $this->client->put(sprintf('processes/%s', $laraWatcher->getProcessId()), [
-            'time' => (microtime(true) - $laraWatcher->getStart()) * 1000,
-            'endedAt' => now()->toDateTimeString(),
-            'models' => $laraWatcher->getHydratedModels(),
-        ]);
+        $endedAt = now()->toDateTimeString();
+        $time = (microtime(true) - $laraWatcher->getStart()) * 1000;
 
         $explain = config('larawatcher.explain');
 
@@ -35,5 +32,11 @@ class Save extends BaseAction
                     $postData->toArray(),
                 );
             });
+
+        $this->client->put(sprintf('processes/%s', $laraWatcher->getProcessId()), [
+            'time' => $time,
+            'endedAt' => $endedAt,
+            'models' => $laraWatcher->getHydratedModels(),
+        ]);
     }
 }
