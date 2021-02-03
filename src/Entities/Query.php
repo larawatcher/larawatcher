@@ -43,7 +43,7 @@ final class Query extends BaseEntity
             'time' => $this->queryExecuted->time,
             'connection' => $this->queryExecuted->connection->getName(),
             'file' => $this->getFile($firstFrame),
-            'line' => is_int($firstFrame->lineNumber) ? $firstFrame->lineNumber - 1 : 0,
+            'line' => $firstFrame->lineNumber,
             'tag' => $this->tag,
             'explain' => $this->withExplain ? json_encode($this->explain()) : null,
             'backtrace' => $this->getBacktrace()->toJson(),

@@ -28,7 +28,6 @@ final class HydratedModel extends BaseEntity
             'class' => $this->model,
             'file' => $this->getFile($firstFrame),
             'line' => $firstFrame->lineNumber,
-            'backtrace' => $this->getBacktrace()->toJson(),
         ];
     }
 }

@@ -9,13 +9,13 @@ use Larawatcher\Larawatcher;
 
 class Save extends BaseAction
 {
-    private const CHUNK_SIZE = 500;
+    private const CHUNK_SIZE = 50;
 
     public function handle()
     {
         $laraWatcher = resolve(Larawatcher::class);
 
-        if (! $laraWatcher->isEnabled()) {
+        if (!$laraWatcher->isEnabled()) {
             return;
         }
 
@@ -30,7 +30,7 @@ class Save extends BaseAction
         collect($laraWatcher->getQueries())
             ->chunk(self::CHUNK_SIZE)
             ->each(function (Collection $queries) use ($explain, $laraWatcher) {
-                $postData = $queries->map(fn (Query $query) => $query->withExplain($explain)->toArray());
+                $postData = $queries->map(fn(Query $query) => $query->withExplain($explain)->toArray());
                 $this->client->post(
                     sprintf('processes/%s/queries/', $laraWatcher->getProcessId()),
                     $postData->toArray(),
@@ -40,7 +40,7 @@ class Save extends BaseAction
         collect($laraWatcher->getHydratedModels())
             ->chunk(self::CHUNK_SIZE)
             ->each(function (Collection $models) use ($laraWatcher) {
-                $postData = $models->map(fn (HydratedModel $model) => $model->toArray());
+                $postData = $models->map(fn(HydratedModel $model) => $model->toArray());
                 $this->client->post(
                     sprintf('processes/%s/models/', $laraWatcher->getProcessId()),
                     $postData->toArray(),
