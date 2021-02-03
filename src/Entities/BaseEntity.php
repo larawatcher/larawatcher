@@ -17,7 +17,7 @@ abstract class BaseEntity
     {
         return collect($backtrace->frames())
             ->filter(
-                fn (Frame $frame) => ! Str::contains($frame->file, [
+                fn(Frame $frame) => !Str::contains($frame->file, [
                     '/vendor/',
                     'Larawatcher.php',
                     '/laravel-db-profiler/',
@@ -29,15 +29,13 @@ abstract class BaseEntity
 
     protected function getFile(Frame $frame)
     {
-        $appPath = config('larawatcher.app_path') ?: base_path();
-
-        return Str::replaceFirst($appPath, '', $frame->file);
+        return Str::replaceFirst(base_path(), '', $frame->file);
     }
 
     protected function getBacktrace(): Collection
     {
         return $this->frames->map(
-            fn (Frame $frame) => [
+            fn(Frame $frame) => [
                 'file' => $this->getFile($frame),
                 'line' => $frame->lineNumber,
                 'code' => $frame->getSnippet(5),
