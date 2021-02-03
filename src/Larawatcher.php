@@ -15,7 +15,6 @@ use Illuminate\Support\Str;
 use Larawatcher\Actions\InitiateProcess;
 use Larawatcher\Actions\Live;
 use Larawatcher\Actions\Save;
-use Larawatcher\Entities\HydratedModel;
 use Larawatcher\Entities\Query;
 use Spatie\Backtrace\Backtrace;
 
@@ -30,7 +29,7 @@ final class Larawatcher
     private bool $enabled;
     private string $processId;
     private PendingRequest $client;
-    private array $hydratedModels = [];
+    private int $hydratedModels = 0;
     private Save $saveAction;
     private InitiateProcess $initiateProcessAction;
 
@@ -78,7 +77,7 @@ final class Larawatcher
         return $this->processId;
     }
 
-    public function getHydratedModels(): array
+    public function getHydratedModels(): int
     {
         return $this->hydratedModels;
     }
@@ -90,7 +89,7 @@ final class Larawatcher
 
     public function handle(): void
     {
-        if (! $this->enabled) {
+        if (!$this->enabled) {
             return;
         }
 
@@ -118,7 +117,7 @@ final class Larawatcher
     private function setProcessType(): self
     {
         $this->app['events']->listen(RouteMatched::class, function (RouteMatched $event) {
-            if (! is_null($this->type)) {
+            if (!is_null($this->type)) {
                 return;
             }
 
@@ -134,7 +133,7 @@ final class Larawatcher
         });
 
         $this->app['events']->listen(CommandStarting::class, function (CommandStarting $event) {
-            if (! is_null($this->type) || Str::startsWith($event->command, 'queue:')) {
+            if (!is_null($this->type) || Str::startsWith($event->command, 'queue:')) {
                 return;
             }
 
@@ -144,7 +143,7 @@ final class Larawatcher
         });
 
         $this->app['events']->listen(JobProcessing::class, function (JobProcessing $event) {
-            if (! is_null($this->type)) {
+            if (!is_null($this->type)) {
                 return;
             }
 
@@ -172,9 +171,7 @@ final class Larawatcher
     private function listenForModelHydration(): self
     {
         $this->app['events']->listen('eloquent.retrieved:*', function ($_, $models) {
-            foreach (array_filter($models) as $model) {
-                $this->hydratedModels[] = new HydratedModel(get_class($model), Backtrace::create());
-            }
+            $this->hydratedModels = $this->hydratedModels + count($models);
         });
 
         return $this;
@@ -183,7 +180,7 @@ final class Larawatcher
     private function listenForExceptions(): self
     {
         $this->app['events']->listen(MessageLogged::class, function ($event) {
-            if (! array_key_exists('exception', $event->context)) {
+            if (!array_key_exists('exception', $event->context)) {
                 return;
             }
 
