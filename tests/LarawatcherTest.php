@@ -129,7 +129,8 @@ class LarawatcherTest extends TestCase
     /** @test */
     public function it_pushes_hydrated_models_to_the_array()
     {
-        event('eloquent.retrieved:*', [new class extends Model {}]);
+        event('eloquent.retrieved:*', [new class extends Model {
+        }]);
 
         $models = resolve(Larawatcher::class)->getHydratedModels();
 
