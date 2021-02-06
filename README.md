@@ -1,14 +1,24 @@
 <div align="center">
 <img src="./images/logo.svg" width="80" height="80">
 <h1>Larawatcher</h1>
-</div> 
+</div>
 
 [![PHP Version](https://img.shields.io/packagist/php-v/larawatcher/larawatcher)](https://packagist.org/packages/larawatcher/larawatcher)
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/larawatcher/larawatcher)](https://packagist.org/packages/larawatcher/larawatcher)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/larawatcher/larawatcher/Tests)](https://github.com/larawatcher/larawatcher/actions?query=workflow%3ATests+branch%3Amaster)
 [![License](https://img.shields.io/packagist/l/larawatcher/larawatcher)](https://packagist.org/packages/larawatcher/larawatcher)
 
-Larawatcher is a combination of Laravel Package and a stand alone desktop application that lets you profile database queries, find N+1 issues, backtrace to the code and more. 
+Larawatcher is a combination of Laravel Package and a stand alone desktop application that lets you profile database queries, find N+1 issues, backtrace to the code and more.
+
+## Desktop Application
+
+<div align="center">
+<img src="./images/screenshot.png" width="400" >
+</div>
+
+Larawatcher comes with a stand-alone application that receives requests from your application, saves them and provides you with a dashboard to work with it.
+
+You can download the latest version of the `Larawatcher Desktop` from https://github.com/larawatcher/desktop-builds/releases.
 
 ## Installation
 
@@ -19,6 +29,7 @@ composer require --dev larawatcher/larawatcher
 ```
 
 You can publish the config file with:
+
 ```bash
 php artisan vendor:publish --provider="Larawatcher\Providers\LarawatcherServiceProvider" --tag="config"
 ```
@@ -66,13 +77,14 @@ return [
 
 ## How does it work?
 
-Larawatcher will listen to events related to `routes`, `commands` and `jobs` (including asynchronous ones), then it will watch the queries and communicate it back to the desktop app.
-Please note the entry point to the application will invoke the watcher and it won't be two separate process (except the async jobs). For example: if you have route that will run an artisan command and fire off a sync job, all queries ran will be captures in `route` process.
+Larawatcher will listen to events related to `routes`, `commands` and `jobs` (including asynchronous ones), then it will watch the queries and communicate them back to the desktop app.
+Please note the entry point to the application will invoke the watcher, and it won't be two separate processes (except the async jobs). For example: if you have a route that will run an artisan command and fire off a sync job, all queries will be captures in the `route` process.
 
 ## How to use tags?
 
-In order to leverage tag feature on Larawatcher, you may tag and untag part of your code using the Larawatcher facade, or the helper functions.
-Facade Example:
+To leverage the tag feature on Larawatcher, you may tag and untag part of your code using the Larawatcher facade or the helper functions.
+Facade Example::
+
 ```php
 Larawatcher::tag('load-users');
 
@@ -82,6 +94,7 @@ Larawatcher::untag('load-users');
 ```
 
 Helper functions example:
+
 ```php
 lw_tag('load-users');
 
@@ -92,7 +105,7 @@ lw_untag('load-users');
 
 ## Testing
 
-``` bash
+```bash
 composer test
 ```
 
@@ -110,8 +123,8 @@ If you discover any security related issues, please email hs@houmaan.ca instead 
 
 ## Credits
 
-- [Hugh Saffar](https://github.com/hughsaffar)
-- [All Contributors](../../contributors)
+-   [Hugh Saffar](https://github.com/hughsaffar)
+-   [All Contributors](../../contributors)
 
 ## License
 
